@@ -7,5 +7,5 @@ if (!file_exists($autoloadFile)) {
 require_once $autoloadFile;
 
 $loader = new \Composer\Autoload\ClassLoader();
-$loader->add('My\Project\Test', 'test');
+$loader->add('Zuora\Test', 'test');
 $loader->register();
