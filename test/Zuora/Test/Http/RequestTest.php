@@ -60,7 +60,7 @@ class RequestTest extends \Zuora\Test\Base {
         $this->assertEquals($options[CURLOPT_CUSTOMREQUEST], 'DELETE');
 
         $options = $this->invokeMethod($request, 'getCurlOptions', array($url, $port, 'GET', $data));
-        $this->assertEmpty($options[CURLOPT_POSTFIELDS]);
+        $this->assertTrue(!isset($options[CURLOPT_POSTFIELDS]));
 
         $options = $this->invokeMethod($request, 'getCurlOptions', array($url, $port, 'POST', $data));
         $this->assertNotEmpty($options[CURLOPT_POSTFIELDS]);

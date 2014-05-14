@@ -151,8 +151,10 @@ class Request implements RequestInterface
         }
 
         // Add method specific cURL options
-        if ($method == 'POST' && !is_array($opts[CURLOPT_POSTFIELDS])) {
-            $opts[CURLOPT_POST] = 1;
+        if ($method == 'POST') {
+            if (!isset($opts[CURLOPT_POSTFIELDS]) || (isset($opts[CURLOPT_POSTFIELDS]) && !is_array($opts[CURLOPT_POSTFIELDS]))) {
+                $opts[CURLOPT_POST] = 1;
+            }
         }
         elseif (in_array($method, array('DELETE', 'PUT'))) {
             $opts[CURLOPT_CUSTOMREQUEST] = $method;
@@ -202,7 +204,10 @@ class Request implements RequestInterface
         $parsed_url = parse_url($url);
 
         // Build base URL without port
-        $url = "{$parsed_url['scheme']}://{$parsed_url['host']}{$parsed_url['path']}";
+        $url = "{$parsed_url['scheme']}://{$parsed_url['host']}";
+        if (isset($parsed_url['path'])) {
+            $url .= $parsed_url['path'];
+        }
 
         // If url string contained query options add query
         if (isset($parsed_url['query'])) {
