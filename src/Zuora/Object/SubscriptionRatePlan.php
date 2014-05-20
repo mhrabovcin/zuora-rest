@@ -8,6 +8,30 @@ class SubscriptionRatePlan extends Object {
     /**
      * @return mixed
      */
+    public function getLastChangeType()
+    {
+      return $this->lastChangeType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductId()
+    {
+      return $this->productId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductRatePlanId()
+    {
+      return $this->productRatePlanId;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;

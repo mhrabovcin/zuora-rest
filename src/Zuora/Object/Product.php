@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mhrabovcin
- * Date: 09/05/14
- * Time: 21:28
- */
 
 namespace Zuora\Object;
 
