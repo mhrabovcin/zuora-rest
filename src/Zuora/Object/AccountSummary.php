@@ -29,4 +29,9 @@ class AccountSummary extends Account {
     {
         return $this->map('payments', '\Zuora\Object\PaymentSummary');
     }
+
+    public function getDefaultPaymentMethod() {
+        return new DefaultPaymentMethod($this->defaultPaymentMethod);
+    }
+
 } 
