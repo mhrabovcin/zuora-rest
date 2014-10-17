@@ -125,18 +125,22 @@ class Request implements RequestInterface
      *
      * @param array $files
      *   (Optional) Files to send
+     *
+     * @return array
+     *   cURL options
      */
     protected function getCurlOptions($url, $port = null, $method = 'GET', $data = array(), $headers = array(), $files = array())
     {
         // Default options for every CURL request
         $opts = array(
-           CURLOPT_URL => $url,
-           CURLOPT_RETURNTRANSFER => true,
-           CURLOPT_TIMEOUT => $this->curl_options['timeout'],
-           CURLOPT_HTTPHEADER => array(),
-           CURLOPT_HEADER => true,
-           CURLINFO_HEADER_OUT => true,
-           CURLOPT_USERAGENT => $this->curl_options['user_agent'],
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => $this->curl_options['timeout'],
+            CURLOPT_HTTPHEADER => array(),
+            CURLOPT_HEADER => true,
+            CURLINFO_HEADER_OUT => true,
+            CURLOPT_USERAGENT => $this->curl_options['user_agent'],
+            CURLOPT_SSLVERSION => 1, // CURL_SSLVERSION_TLSv1
         );
 
         if (isset($port)) {
@@ -144,7 +148,7 @@ class Request implements RequestInterface
         }
 
         if (!empty($files)) {
-            $opts[CURLOPT_POSTFIELDS] = $files + $data;;
+            $opts[CURLOPT_POSTFIELDS] = $files + $data;
         }
         elseif (!empty($data) && $method != 'GET') {
             $opts[CURLOPT_POSTFIELDS] = json_encode($data);
