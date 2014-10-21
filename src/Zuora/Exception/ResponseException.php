@@ -17,13 +17,14 @@ class ResponseException extends Exception {
 
 
     /**
-     * Http reseponse exception.
+     * Http response exception.
      *
      * @param Response $response
      */
     function __construct(Response $response)
     {
         $this->response = $response;
+        parent::__construct($this->getMessageFromResponse());
     }
 
     /**
@@ -34,7 +35,7 @@ class ResponseException extends Exception {
         return $this->response;
     }
 
-    public function __toString()
+    public function getMessageFromResponse()
     {
         $response = $this->getResponse();
         $message = array();
@@ -51,8 +52,13 @@ class ResponseException extends Exception {
             $message[] = $response->getErrorMessage();
         }
 
-        if (!empty($message)) {
-            return implode(' ', $message);
+        return implode(' ', $message);
+    }
+
+    public function __toString()
+    {
+        if ($message = $this->getMessageFromResponse()) {
+            return $message;
         }
         else {
             return parent::__toString();

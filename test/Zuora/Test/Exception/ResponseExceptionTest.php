@@ -30,5 +30,7 @@ class ResponseExceptionTest extends \PHPUnit_Framework_TestCase {
         // cURL message
         $response->setErrorMessage('remote host timed out');
         $this->assertContains($response->getErrorMessage(), $exception->__toString());
+
+        $this->assertContains($response->getErrorMessage(), $exception->getMessageFromResponse());
     }
 } 
