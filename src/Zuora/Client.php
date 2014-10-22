@@ -39,11 +39,14 @@ class Client
      * @param array $options
      *   Options passed to \Zuora\Environment
      *
+     * @param array $request_options
+     *   Options passed to \Zuora\Http\Request
+     *
      * @return static
      */
-    public static function factory($options = array())
+    public static function factory($options = array(), $request_options = array())
     {
-        return new static(Environment::factory($options), new \Zuora\Http\Request());
+        return new static(Environment::factory($options), new \Zuora\Http\Request($request_options));
     }
 
     /**
