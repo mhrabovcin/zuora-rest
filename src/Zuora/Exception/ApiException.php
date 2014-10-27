@@ -31,11 +31,11 @@ class ApiException extends ResponseException {
 
 
     /**
-     * Convert exception to string.
+     * Create single line message from exception.
      *
      * @return string
      */
-    public function __toString()
+    public function getMessageFromResponse()
     {
         $output = '';
 
@@ -49,6 +49,5 @@ class ApiException extends ResponseException {
 
         return $output;
     }
-
 
 } 

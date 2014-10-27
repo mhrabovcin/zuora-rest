@@ -35,6 +35,11 @@ class ResponseException extends Exception {
         return $this->response;
     }
 
+    /**
+     * Create single line message from exception.
+     *
+     * @return string
+     */
     public function getMessageFromResponse()
     {
         $response = $this->getResponse();
@@ -55,6 +60,16 @@ class ResponseException extends Exception {
         return implode(' ', $message);
     }
 
+    /**
+     * Get exception data
+     *
+     * @return array
+     */
+    public function getData()
+    {
+        return $this->getResponse()->getData();
+    }
+
     public function __toString()
     {
         if ($message = $this->getMessageFromResponse()) {
@@ -63,10 +78,5 @@ class ResponseException extends Exception {
         else {
             return parent::__toString();
         }
-    }
-
-    public function getData()
-    {
-        return $this->getResponse()->getData();
     }
 }
