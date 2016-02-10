@@ -31,6 +31,9 @@ class Request implements RequestInterface
             'timeout' => 5,
             'ssl_verifypeer_skip' => false,
             'user_agent' => 'Zuora PHP Client/0.1',
+            // Default SSL version is TLS v1.2. For PHP 5.5+ you may
+            // use CURL constants as CURL_SSLVERSION_TLSv1_2
+            'ssl_version' => 6,
         );
     }
 
@@ -140,7 +143,7 @@ class Request implements RequestInterface
             CURLOPT_HEADER => true,
             CURLINFO_HEADER_OUT => true,
             CURLOPT_USERAGENT => $this->curl_options['user_agent'],
-            CURLOPT_SSLVERSION => 1, // CURL_SSLVERSION_TLSv1
+            CURLOPT_SSLVERSION => $this->curl_options['ssl_version'],
         );
 
         if (isset($port)) {
