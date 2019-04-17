@@ -56,7 +56,7 @@ class Response
     public function map($entity, $classname)
     {
         $data = $this->response->getData();
-        $object = new \Zuora\Object\Object($data);
+        $object = new \Zuora\Object\ZuoraObject($data);
         return $object->map($entity, $classname);
     }
 

@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Account extends Object {
+class Account extends ZuoraObject {
 
     function __construct($data = array())
     {

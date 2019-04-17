@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class UsageUploadResult extends Object {
+class UsageUploadResult extends ZuoraObject {
 
     /**
      * Retrieve uploaded file size

@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class HmacSignature extends Object {
+class HmacSignature extends ZuoraObject {
 
     /**
      * @return mixed

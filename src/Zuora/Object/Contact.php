@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Contact extends Object {
+class Contact extends ZuoraObject {
 
     /**
      * @return mixed

@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class SubscriptionSummary extends Object
+class SubscriptionSummary extends ZuoraObject
 {
 
     /**

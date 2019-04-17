@@ -4,7 +4,7 @@
 namespace Zuora\Object;
 
 
-class Usage extends Object {
+class Usage extends ZuoraObject {
 
     /**
      * @return mixed

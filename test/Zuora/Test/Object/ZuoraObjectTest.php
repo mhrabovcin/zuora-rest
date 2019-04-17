@@ -3,9 +3,9 @@
 namespace Zuora\Test\Object;
 
 
-use Zuora\Object\Object;
+use Zuora\Object\ZuoraObject;
 
-class ObjectTest extends \PHPUnit_Framework_TestCase {
+class ZuoraObjectTest extends \PHPUnit_Framework_TestCase {
 
     public function testObject()
     {
@@ -15,7 +15,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
             'CustomField__c' => 'value',
         );
 
-        $object = new Object($data);
+        $object = new ZuoraObject($data);
         $this->assertEquals($object->id, $data['id']);
         $this->assertEquals($object->name, $data['name']);
         $this->assertEquals($object->getCustomField('CustomField'), $data['CustomField__c']);
@@ -30,8 +30,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
     public function testMapWrongArgument()
     {
         $data = array();
-        $object = new Object($data);
-        $object->map('noexisting', '\Zuora\Object\Object');
+        $object = new ZuoraObject($data);
+        $object->map('noexisting', '\Zuora\Object\ZuoraObject');
     }
 
     /**
@@ -42,8 +42,8 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
     public function testdMapWrongArgumentType()
     {
         $data = array('scalar' => 'value');
-        $object = new Object($data);
-        $object->map('scalar', '\Zuora\Object\Object');
+        $object = new ZuoraObject($data);
+        $object->map('scalar', '\Zuora\Object\ZuoraObject');
     }
 
     /**
@@ -54,7 +54,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase {
     public function testdMapWrongClassname()
     {
         $data = array('test' => array());
-        $object = new Object($data);
+        $object = new ZuoraObject($data);
         $object->map('test', 'MissingClass');
     }
 } 

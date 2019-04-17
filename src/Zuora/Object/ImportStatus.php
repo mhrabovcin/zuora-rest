@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class ImportStatus extends Object {
+class ImportStatus extends ZuoraObject {
 
     /**
      * @return mixed

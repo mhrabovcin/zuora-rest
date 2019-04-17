@@ -25,7 +25,7 @@ class ApiException extends ResponseException {
      */
     public function getReasons()
     {
-        $object = new \Zuora\Object\Object($this->getData());
+        $object = new \Zuora\Object\ZuoraObject($this->getData());
         return $object->map('reasons', '\Zuora\Object\Reason');
     }
 

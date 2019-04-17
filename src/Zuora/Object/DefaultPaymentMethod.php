@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class DefaultPaymentMethod extends Object {
+class DefaultPaymentMethod extends ZuoraObject {
 
     /**
      * @return mixed

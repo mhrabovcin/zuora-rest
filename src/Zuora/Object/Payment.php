@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Payment extends Object {
+class Payment extends ZuoraObject {
 
     /**
      * @return mixed

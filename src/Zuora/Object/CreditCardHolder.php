@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class CreditCardHolder extends Object {
+class CreditCardHolder extends ZuoraObject {
 
     /**
      * @return mixed

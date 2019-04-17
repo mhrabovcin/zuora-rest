@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Product extends Object {
+class Product extends ZuoraObject {
 
     public function getId()
     {

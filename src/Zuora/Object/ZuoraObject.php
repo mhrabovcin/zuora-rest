@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Object {
+class ZuoraObject {
 
 
     /**

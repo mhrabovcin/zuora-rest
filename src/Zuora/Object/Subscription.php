@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class Subscription extends Object {
+class Subscription extends ZuoraObject {
 
     /**
      * @return mixed

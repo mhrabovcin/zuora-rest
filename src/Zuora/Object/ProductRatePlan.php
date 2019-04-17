@@ -3,7 +3,7 @@
 namespace Zuora\Object;
 
 
-class ProductRatePlan extends Object {
+class ProductRatePlan extends ZuoraObject {
 
     /**
      * Zuora id
