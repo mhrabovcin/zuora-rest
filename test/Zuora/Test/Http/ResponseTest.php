@@ -2,9 +2,11 @@
 
 namespace Zuora\Test\Http;
 
+use PHPUnit\Framework\TestCase;
 use Zuora\Http\Response;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase {
+class ResponseTest extends TestCase
+{
 
     protected function getTestOkResponse()
     {

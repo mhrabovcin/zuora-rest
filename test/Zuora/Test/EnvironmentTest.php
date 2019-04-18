@@ -2,9 +2,10 @@
 
 namespace Zuora\Test;
 
+use PHPUnit\Framework\TestCase;
 use Zuora\Environment;
 
-class EnvironmentTest extends \PHPUnit_Framework_TestCase
+class EnvironmentTest extends TestCase
 {
     public function testFactory()
     {

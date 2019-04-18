@@ -2,12 +2,11 @@
 
 namespace Zuora\Test;
 
-
 use Zuora\Client;
-use Zuora\Environment;
+use Zuora\Http\RequestInterface;
 use Zuora\Http\Response;
 
-class ResponseTest extends \Zuora\Test\Base {
+class ResponseTest extends Base {
 
     /**
      * Tests Response pagination and class mapping
@@ -35,7 +34,7 @@ class ResponseTest extends \Zuora\Test\Base {
             ->setData(array('nextPage' => $environment->getUrl('accounts') . '?page=3') + $response_data);
 
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
            ->method('call')
            ->with($this->equalTo($environment->getUrl('accounts')),

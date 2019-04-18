@@ -2,10 +2,11 @@
 
 namespace Zuora\Test\Object;
 
-
+use PHPUnit\Framework\TestCase;
 use Zuora\Object\ZuoraObject;
 
-class ZuoraObjectTest extends \PHPUnit_Framework_TestCase {
+class ZuoraObjectTest extends TestCase
+{
 
     public function testObject()
     {

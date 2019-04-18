@@ -2,8 +2,8 @@
 
 namespace Zuora\Test;
 
-
 use Zuora\Client;
+use Zuora\Http\RequestInterface;
 use Zuora\Http\Response;
 
 class ClientTest extends \Zuora\Test\Base {
@@ -17,18 +17,18 @@ class ClientTest extends \Zuora\Test\Base {
     public function testClientErrorCurlResponse()
     {
 
-        $enviroment = $this->getEnvironment();
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(0)
             ->setErrorCode(68)
             ->setErrorMessage("connection to host timed out");
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
             ->method('call')
             ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
     }
 
@@ -38,16 +38,16 @@ class ClientTest extends \Zuora\Test\Base {
      * @expectedException \Zuora\Exception\ResponseException
      */
     public function testClientApiErrorResponse() {
-        $enviroment = $this->getEnvironment();
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(400);
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
            ->method('call')
            ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
     }
 
@@ -58,7 +58,7 @@ class ClientTest extends \Zuora\Test\Base {
      */
     public function testClientLogicErrorResponse()
     {
-        $enviroment = $this->getEnvironment();
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(200)
             ->setData(array(
@@ -70,12 +70,12 @@ class ClientTest extends \Zuora\Test\Base {
                )
             ));
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
            ->method('call')
            ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
 
     }

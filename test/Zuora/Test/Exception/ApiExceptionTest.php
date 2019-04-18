@@ -2,11 +2,12 @@
 
 namespace Zuora\Test\Exception;
 
-
+use PHPUnit\Framework\TestCase;
 use Zuora\Exception\ApiException;
 use Zuora\Http\Response;
 
-class ApiExceptionTest extends \PHPUnit_Framework_TestCase {
+class ApiExceptionTest extends TestCase
+{
 
     protected $error_data = '{
   "success": false,
