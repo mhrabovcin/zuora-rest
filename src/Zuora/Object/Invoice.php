@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class Invoice extends ZuoraObject {
+class Invoice extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -100,4 +100,4 @@ class Invoice extends ZuoraObject {
     {
         return $this->map('invoiceItems', '\Zuora\Object\InvoiceItem');
     }
-} 
+}

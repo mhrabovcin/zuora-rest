@@ -2,8 +2,22 @@
 
 namespace Zuora;
 
+use Zuora\Exception\ApiException;
 use Zuora\Exception\Exception;
+use Zuora\Exception\ResponseException;
+use Zuora\Http\Request;
 use Zuora\Http\RequestInterface;
+use Zuora\Object\Account;
+use Zuora\Object\AccountSummary;
+use Zuora\Object\CreditCard;
+use Zuora\Object\HmacSignature;
+use Zuora\Object\ImportStatus;
+use Zuora\Object\Invoice;
+use Zuora\Object\Payment;
+use Zuora\Object\Product;
+use Zuora\Object\Subscription;
+use Zuora\Object\Usage;
+use Zuora\Object\UsageUploadResult;
 
 class Client
 {
@@ -27,7 +41,7 @@ class Client
      * @param \Zuora\Environment $environment
      * @param \Zuora\Http\RequestInterface $request
      */
-    function __construct(Environment $environment, RequestInterface $request)
+    public function __construct(Environment $environment, RequestInterface $request)
     {
         $this->environment = $environment;
         $this->request = $request;
@@ -44,9 +58,9 @@ class Client
      *
      * @return static
      */
-    public static function factory($options = array(), $request_options = array())
+    public static function factory($options = [], $request_options = [])
     {
-        return new static(Environment::factory($options), new \Zuora\Http\Request($request_options));
+        return new static(Environment::factory($options), new Request($request_options));
     }
 
     /**
@@ -74,22 +88,28 @@ class Client
      * @param array $data
      *   POST data
      *
-     * @return Response
+     * @param array $files
+     *   Files array that should be sent in request
+     *
+     * @return \Zuora\Response
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
-    public function request($path, $method = 'GET', $query = array(), $data = array(), $files = array())
+    public function request($path, $method = 'GET', $query = [], $data = [], $files = [])
     {
         $url = $this->getEnvironment()->getUrl($path);
         $headers = $this->getAuthHeaders();
         $response = $this->request->call($url, $method, $query, $data, $headers, $files);
 
         if ($response->isError()) {
-            throw new \Zuora\Exception\ResponseException($response);
+            throw new ResponseException($response);
         }
 
         // Zuora specific when HTTP code is 200 but result isn't successful
         $data = $response->getData();
         if (isset($data['success']) && !$data['success']) {
-            throw new \Zuora\Exception\ApiException($response);
+            throw new ApiException($response);
         }
 
         return new Response($response, $this);
@@ -102,10 +122,10 @@ class Client
      */
     protected function getAuthHeaders()
     {
-        return array(
-           'apiAccessKeyId' => $this->environment->getUsername(),
-           'apiSecretAccessKey' => $this->environment->getPassword(),
-        );
+        return [
+            'apiAccessKeyId' => $this->environment->getUsername(),
+            'apiSecretAccessKey' => $this->environment->getPassword(),
+        ];
     }
 
     /**
@@ -124,10 +144,13 @@ class Client
      *   (Optional) Additional query params
      *
      * @return array
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
-    protected function getPaginatedObjects($path, $key, $classname, $query = array())
+    protected function getPaginatedObjects($path, $key, $classname, $query = [])
     {
-        $objects = array();
+        $objects = [];
 
         $response = $this->request($path, 'GET', $query);
         do {
@@ -141,10 +164,13 @@ class Client
      * All products in catalog
      *
      * @return \Zuora\Object\Product[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getCatalog()
     {
-        return $this->getPaginatedObjects('catalog/products', 'products', '\Zuora\Object\Product');
+        return $this->getPaginatedObjects('catalog/products', 'products', Product::class);
     }
 
     /**
@@ -154,11 +180,14 @@ class Client
      *   Zuora account id
      *
      * @return \Zuora\Object\Account
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getAccount($id)
     {
         $response = $this->request('accounts/' . $id);
-        return new \Zuora\Object\Account($response->getData());
+        return new Account($response->getData());
     }
 
     /**
@@ -168,13 +197,15 @@ class Client
      *   Zuora account id
      *
      * @return \Zuora\Object\AccountSummary
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getAccountSummary($id)
     {
         $response = $this->request('accounts/' . $id . '/summary');
-        return new \Zuora\Object\AccountSummary($response->getData());
+        return new AccountSummary($response->getData());
     }
-
 
     /**
      * Retrieve account subscriptions
@@ -183,10 +214,13 @@ class Client
      *   Zuora account id
      *
      * @return \Zuora\Object\Subscription[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getAccountSubscriptions($id)
     {
-        return $this->getPaginatedObjects('subscriptions/accounts/' . $id, 'subscriptions', '\Zuora\Object\Subscription');
+        return $this->getPaginatedObjects('subscriptions/accounts/' . $id, 'subscriptions', Subscription::class);
     }
 
     /**
@@ -195,10 +229,13 @@ class Client
      * @param string $id
      *
      * @return \Zuora\Object\CreditCard[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getCreditCards($id)
     {
-        return $this->getPaginatedObjects('payment-methods/credit-cards/accounts/' . $id, 'creditCards', '\Zuora\Object\CreditCard', array('pageSize' => 50));
+        return $this->getPaginatedObjects('payment-methods/credit-cards/accounts/' . $id, 'creditCards', CreditCard::class, ['pageSize' => 50]);
     }
 
     /**
@@ -208,10 +245,13 @@ class Client
      *   Zuora account identifier
      *
      * @return \Zuora\Object\Invoice[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getInvoices($id)
     {
-        return $this->getPaginatedObjects('transactions/invoices/accounts/' . $id, 'invoices', '\Zuora\Object\Invoice', array('pageSize' => 50));
+        return $this->getPaginatedObjects('transactions/invoices/accounts/' . $id, 'invoices', Invoice::class, ['pageSize' => 50]);
     }
 
     /**
@@ -221,10 +261,13 @@ class Client
      *   Zuora account identifier
      *
      * @return \Zuora\Object\Payment[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getPayments($id)
     {
-        return $this->getPaginatedObjects('transactions/payments/accounts/' . $id, 'payments', '\Zuora\Object\Payment', array('pageSize' => 50));
+        return $this->getPaginatedObjects('transactions/payments/accounts/' . $id, 'payments', Payment::class, ['pageSize' => 50]);
     }
 
     /**
@@ -233,11 +276,14 @@ class Client
      * @param string $id
      *
      * @return \Zuora\Object\Subscription
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getSubscription($id)
     {
         $response = $this->request('subscriptions/' . $id);
-        return new \Zuora\Object\Subscription($response->getData());
+        return new Subscription($response->getData());
     }
 
     /**
@@ -253,16 +299,19 @@ class Client
      *   (Optional) Additional fields to sign
      *
      * @return \Zuora\Object\HmacSignature
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
-    public function getHmacSignatures($path, $method, $fields = array())
+    public function getHmacSignatures($path, $method, $fields = [])
     {
-        $data = array(
+        $data = [
             'uri' => $this->getEnvironment()->getUrl($path),
             'method' => $method
-        ) + $fields;
+        ] + $fields;
 
-        $response = $this->request('hmac-signatures', 'POST', array(), $data);
-        return new \Zuora\Object\HmacSignature($response->getData());
+        $response = $this->request('hmac-signatures', 'POST', [], $data);
+        return new HmacSignature($response->getData());
     }
 
     /**
@@ -273,7 +322,11 @@ class Client
      * @param string $file
      *   Path to file
      *
-     * return \Zuora\Object\ImportStatus
+     * @return \Zuora\Object\UsageUploadResult
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\Exception
+     * @throws \Zuora\Exception\ResponseException
      */
     public function uploadUsage($file)
     {
@@ -281,8 +334,8 @@ class Client
             throw new Exception("File is larger than 4 MB.");
         }
 
-        $response = $this->request('usage', 'POST', array(), array(), array('file' => $file));
-        return new \Zuora\Object\UsageUploadResult($response->getData());
+        $response = $this->request('usage', 'POST', [], [], ['file' => $file]);
+        return new UsageUploadResult($response->getData());
     }
 
     /**
@@ -291,10 +344,13 @@ class Client
      * @param string $id
      *
      * @return \Zuora\Object\ImportStatus
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
-    public function getUsageImportStatus($id) {
+    public function getUsageImportStatus($id)
+    {
         $response = $this->request('usage/' . $id . '/status');
-        return new \Zuora\Object\ImportStatus($response->getData());
+        return new ImportStatus($response->getData());
     }
 
     /**
@@ -303,9 +359,12 @@ class Client
      * @param string $id
      *
      * @return \Zuora\Object\Usage[]
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
     public function getUsage($id)
     {
-        return $this->getPaginatedObjects('usage/accounts/' . $id, 'usage', '\Zuora\Object\Usage');
+        return $this->getPaginatedObjects('usage/accounts/' . $id, 'usage', Usage::class);
     }
 }

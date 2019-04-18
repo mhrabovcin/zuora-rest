@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class SubscriptionRatePlanCharge extends ZuoraObject {
+class SubscriptionRatePlanCharge extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -68,5 +68,4 @@ class SubscriptionRatePlanCharge extends ZuoraObject {
     {
         return $this->type;
     }
-
-} 
+}

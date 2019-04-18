@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class DefaultPaymentMethod extends ZuoraObject {
+class DefaultPaymentMethod extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -52,4 +52,4 @@ class DefaultPaymentMethod extends ZuoraObject {
     {
         return $this->paymentMethodType;
     }
-} 
+}

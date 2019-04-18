@@ -2,9 +2,8 @@
 
 namespace Zuora\Exception;
 
-
-class ApiException extends ResponseException {
-
+class ApiException extends ResponseException
+{
 
     /**
      * Retrieve Zuora Process ID
@@ -17,7 +16,6 @@ class ApiException extends ResponseException {
         return isset($data['processId']) ? $data['processId'] : null;
     }
 
-
     /**
      * Return list of error reasons
      *
@@ -28,7 +26,6 @@ class ApiException extends ResponseException {
         $object = new \Zuora\Object\ZuoraObject($this->getData());
         return $object->map('reasons', '\Zuora\Object\Reason');
     }
-
 
     /**
      * Create single line message from exception.
@@ -49,5 +46,4 @@ class ApiException extends ResponseException {
 
         return $output;
     }
-
-} 
+}

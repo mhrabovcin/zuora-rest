@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class Contact extends ZuoraObject {
+class Contact extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -156,6 +156,4 @@ class Contact extends ZuoraObject {
     {
         return $this->zipCode;
     }
-
-
-} 
+}

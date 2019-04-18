@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class CreditCardHolder extends ZuoraObject {
+class CreditCardHolder extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -76,5 +76,4 @@ class CreditCardHolder extends ZuoraObject {
     {
         return $this->zipCode;
     }
-
-} 
+}

@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class HmacSignature extends ZuoraObject {
+class HmacSignature extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -28,4 +28,4 @@ class HmacSignature extends ZuoraObject {
     {
         return $this->token;
     }
-} 
+}

@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class Subscription extends ZuoraObject {
+class Subscription extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -158,4 +158,4 @@ class Subscription extends ZuoraObject {
     {
         return $this->totalContractedValue;
     }
-} 
+}

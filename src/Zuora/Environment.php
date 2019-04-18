@@ -2,8 +2,8 @@
 
 namespace Zuora;
 
-class Environment {
-
+class Environment
+{
     /**
      * Endpoint URL.
      *
@@ -31,7 +31,7 @@ class Environment {
     protected $password;
 
     /**
-     * Create new environemnt.
+     * Create new environment.
      *
      * @param array $options
      *   array(
@@ -43,7 +43,8 @@ class Environment {
      *
      * @return Environment
      */
-    public static function factory($options) {
+    public static function factory($options)
+    {
         $environment = new static();
 
         if (isset($options['endpoint'])) {
@@ -140,5 +141,4 @@ class Environment {
     {
         return $this->getEndpoint() . '/v' . $this->getVersion() . '/' . $path;
     }
-
-} 
+}

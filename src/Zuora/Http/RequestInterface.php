@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mhrabovcin
- * Date: 09/05/14
- * Time: 15:51
- */
 
 namespace Zuora\Http;
 
-
-interface RequestInterface {
+interface RequestInterface
+{
 
     /**
      * Make HTTP Request via cURL
@@ -33,6 +27,5 @@ interface RequestInterface {
      *
      * @return Response
      */
-    public function call($url, $method = 'GET', $query = array(), $data = array(), $headers = array(), $files = array());
-
-} 
+    public function call($url, $method = 'GET', $query = [], $data = [], $headers = [], $files = []);
+}

@@ -2,7 +2,6 @@
 
 namespace Zuora\Http;
 
-
 class Response
 {
 
@@ -32,7 +31,7 @@ class Response
      *
      * @var array
      */
-    protected $headers = array();
+    protected $headers = [];
 
     /**
      * Error message
@@ -156,7 +155,7 @@ class Response
     public function getCookies()
     {
         if (!isset($this->cookies)) {
-            $this->cookies = array();
+            $this->cookies = [];
             foreach ($this->getHeaders() as $line) {
                 if (preg_match('~^Set-Cookie:\s* (?<name>[^=]+)=(?<value>[^;]+).*$~', $line, $matches)) {
                     $this->cookies[$matches['name']] = $matches['value'];
@@ -218,4 +217,4 @@ class Response
 
         return $response;
     }
-} 
+}

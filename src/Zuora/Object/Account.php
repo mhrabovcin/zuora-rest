@@ -2,10 +2,10 @@
 
 namespace Zuora\Object;
 
+class Account extends ZuoraObject
+{
 
-class Account extends ZuoraObject {
-
-    function __construct($data = array())
+    public function __construct($data = [])
     {
         $changed = $data['basicInfo'];
 
@@ -29,7 +29,7 @@ class Account extends ZuoraObject {
      */
     protected function getAllowedKeys()
     {
-        return array('billToContact', 'soldToContact');
+        return ['billToContact', 'soldToContact'];
     }
 
     /**
@@ -154,13 +154,11 @@ class Account extends ZuoraObject {
 
     public function getBillToContact()
     {
-        return new \Zuora\Object\Contact($this->billToContact);
+        return new Contact($this->billToContact);
     }
 
     public function getSoldToContact()
     {
-        return new \Zuora\Object\Contact($this->soldToContact);
+        return new Contact($this->soldToContact);
     }
-
-
-} 
+}

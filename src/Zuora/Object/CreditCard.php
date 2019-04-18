@@ -2,15 +2,15 @@
 
 namespace Zuora\Object;
 
-
-class CreditCard extends ZuoraObject {
+class CreditCard extends ZuoraObject
+{
 
     /**
      * @return mixed
      */
     public function getCardHolderInfo()
     {
-        return new \Zuora\Object\CreditCardHolder($this->cardHolderInfo);
+        return new CreditCardHolder($this->cardHolderInfo);
     }
 
     /**
@@ -60,5 +60,4 @@ class CreditCard extends ZuoraObject {
     {
         return $this->id;
     }
-
-} 
+}

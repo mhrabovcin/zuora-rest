@@ -2,6 +2,7 @@
 
 namespace Zuora;
 
+use Zuora\Object\ZuoraObject;
 
 class Response
 {
@@ -15,7 +16,6 @@ class Response
      */
     protected $client;
 
-
     /**
      * Constructor
      *
@@ -25,7 +25,7 @@ class Response
      * @param \Zuora\Client $client
      *   Initialized client class
      */
-    function __construct(\Zuora\Http\Response $response, \Zuora\Client $client)
+    public function __construct(\Zuora\Http\Response $response, Client $client)
     {
         $this->response = $response;
         $this->client = $client;
@@ -56,16 +56,20 @@ class Response
     public function map($entity, $classname)
     {
         $data = $this->response->getData();
-        $object = new \Zuora\Object\ZuoraObject($data);
+        $object = new ZuoraObject($data);
         return $object->map($entity, $classname);
     }
 
     /**
      * For paged response fetch next result
      *
-     * @return \Zuora\Response
+     * @return \Zuora\Response|null
+     *
+     * @throws \Zuora\Exception\ApiException
+     * @throws \Zuora\Exception\ResponseException
      */
-    public function nextPage() {
+    public function nextPage()
+    {
 
         $data = $this->response->getData();
 
@@ -81,4 +85,4 @@ class Response
 
         return null;
     }
-} 
+}

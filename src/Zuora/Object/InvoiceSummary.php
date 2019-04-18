@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class InvoiceSummary extends ZuoraObject {
+class InvoiceSummary extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -60,4 +60,4 @@ class InvoiceSummary extends ZuoraObject {
     {
         return $this->status;
     }
-} 
+}

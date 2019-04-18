@@ -2,15 +2,15 @@
 
 namespace Zuora\Object;
 
-
-class SubscriptionRatePlan extends ZuoraObject {
+class SubscriptionRatePlan extends ZuoraObject
+{
 
     /**
      * @return mixed
      */
     public function getLastChangeType()
     {
-      return $this->lastChangeType;
+        return $this->lastChangeType;
     }
 
     /**
@@ -18,7 +18,7 @@ class SubscriptionRatePlan extends ZuoraObject {
      */
     public function getProductId()
     {
-      return $this->productId;
+        return $this->productId;
     }
 
     /**
@@ -26,7 +26,7 @@ class SubscriptionRatePlan extends ZuoraObject {
      */
     public function getProductRatePlanId()
     {
-      return $this->productRatePlanId;
+        return $this->productRatePlanId;
     }
 
     /**
@@ -62,5 +62,4 @@ class SubscriptionRatePlan extends ZuoraObject {
     {
         return $this->ratePlanName;
     }
-
-} 
+}

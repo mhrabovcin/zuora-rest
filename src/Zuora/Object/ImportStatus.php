@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class ImportStatus extends ZuoraObject {
+class ImportStatus extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -20,5 +20,4 @@ class ImportStatus extends ZuoraObject {
     {
         return $this->message;
     }
-
-} 
+}

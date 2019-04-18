@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class Payment extends ZuoraObject {
+class Payment extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -101,5 +101,4 @@ class Payment extends ZuoraObject {
     {
         return $this->type;
     }
-
 }
