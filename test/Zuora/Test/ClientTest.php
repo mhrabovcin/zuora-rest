@@ -6,8 +6,8 @@ use Zuora\Client;
 use Zuora\Http\RequestInterface;
 use Zuora\Http\Response;
 
-class ClientTest extends \Zuora\Test\Base {
-
+class ClientTest extends Base
+{
 
     /**
      * Test cURL error
@@ -37,7 +37,8 @@ class ClientTest extends \Zuora\Test\Base {
      *
      * @expectedException \Zuora\Exception\ResponseException
      */
-    public function testClientApiErrorResponse() {
+    public function testClientApiErrorResponse()
+    {
         $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(400);
@@ -61,14 +62,14 @@ class ClientTest extends \Zuora\Test\Base {
         $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(200)
-            ->setData(array(
+            ->setData([
                'success' => false,
                'processId' => '3F7EA3FD706C7E7C',
-               'reasons' => array(
-                  array('code' => 53100020, 'message' => ' {com.zuora.constraints.either_or_both}',),
-                  array('code' => 53100320, 'message' => "'termType' value should be one of: TERMED, EVERGREEN",)
-               )
-            ));
+               'reasons' => [
+                  ['code' => 53100020, 'message' => ' {com.zuora.constraints.either_or_both}',],
+                  ['code' => 53100320, 'message' => "'termType' value should be one of: TERMED, EVERGREEN",]
+               ]
+            ]);
 
         $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
@@ -77,6 +78,5 @@ class ClientTest extends \Zuora\Test\Base {
 
         $client = new Client($environment, $request);
         $client->request('test');
-
     }
-} 
+}

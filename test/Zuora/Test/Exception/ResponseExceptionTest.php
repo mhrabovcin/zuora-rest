@@ -35,4 +35,4 @@ class ResponseExceptionTest extends TestCase
 
         $this->assertContains($response->getErrorMessage(), $exception->getMessageFromResponse());
     }
-} 
+}

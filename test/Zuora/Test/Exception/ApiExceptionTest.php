@@ -36,7 +36,7 @@ class ApiExceptionTest extends TestCase
         $this->assertCount(2, $exception->getReasons());
 
         foreach ($exception->getReasons() as $reason) {
-            $this->assertTrue(in_array($reason->getCode(), array(53100020, 53100320)));
+            $this->assertTrue(in_array($reason->getCode(), [53100020, 53100320]));
         }
 
         $string = $exception->__toString();
@@ -47,5 +47,4 @@ class ApiExceptionTest extends TestCase
             $this->assertContains($reason->getMessage(), $string);
         }
     }
-
-} 
+}

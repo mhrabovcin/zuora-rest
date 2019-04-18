@@ -15,15 +15,14 @@ class Base extends TestCase
      *
      * @return \Zuora\Environment
      */
-    protected function getEnvironment($options = array())
+    protected function getEnvironment($options = [])
     {
-        return \Zuora\Environment::factory($options + array(
+        return \Zuora\Environment::factory($options + [
            'username' => 'first.last@example.com',
            'password' => 'password',
            'endpoint' => 'http://api.example.com/rest',
-        ));
+        ]);
     }
-
 
     /**
      * Call protected/private method of a class.
@@ -37,7 +36,7 @@ class Base extends TestCase
      *
      * @return mixed Method return.
      */
-    public function invokeMethod($object, $methodName, array $parameters = array())
+    public function invokeMethod($object, $methodName, array $parameters = [])
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
@@ -45,5 +44,4 @@ class Base extends TestCase
 
         return $method->invokeArgs($object, $parameters);
     }
-
-} 
+}

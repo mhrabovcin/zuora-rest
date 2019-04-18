@@ -37,7 +37,7 @@ class ResponseTest extends TestCase
         $response = Response::fromString($this->getTestOkResponse());
         $this->assertEquals($response->getCode(), 200);
         $this->assertEquals($response->getData(), '{"success": true}');
-        $this->assertEquals($response->getCookies(), array());
+        $this->assertEquals($response->getCookies(), []);
     }
 
     public function testCookieParser()
@@ -67,4 +67,4 @@ class ResponseTest extends TestCase
         $response->setErrorCode(68);
         $this->assertTrue($response->isError());
     }
-} 
+}

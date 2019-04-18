@@ -10,11 +10,11 @@ class ZuoraObjectTest extends TestCase
 
     public function testObject()
     {
-        $data = array(
+        $data = [
             'id' => md5(rand()),
             'name' => 'testname',
             'CustomField__c' => 'value',
-        );
+        ];
 
         $object = new ZuoraObject($data);
         $this->assertEquals($object->id, $data['id']);
@@ -30,7 +30,7 @@ class ZuoraObjectTest extends TestCase
      */
     public function testMapWrongArgument()
     {
-        $data = array();
+        $data = [];
         $object = new ZuoraObject($data);
         $object->map('noexisting', '\Zuora\Object\ZuoraObject');
     }
@@ -42,7 +42,7 @@ class ZuoraObjectTest extends TestCase
      */
     public function testdMapWrongArgumentType()
     {
-        $data = array('scalar' => 'value');
+        $data = ['scalar' => 'value'];
         $object = new ZuoraObject($data);
         $object->map('scalar', '\Zuora\Object\ZuoraObject');
     }
@@ -54,8 +54,8 @@ class ZuoraObjectTest extends TestCase
      */
     public function testdMapWrongClassname()
     {
-        $data = array('test' => array());
+        $data = ['test' => []];
         $object = new ZuoraObject($data);
         $object->map('test', 'MissingClass');
     }
-} 
+}
