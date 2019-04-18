@@ -156,7 +156,9 @@ class Request implements RequestInterface
 
         // Add method specific cURL options
         if ($method == 'POST') {
-            if (!isset($opts[CURLOPT_POSTFIELDS]) || (isset($opts[CURLOPT_POSTFIELDS]) && !is_array($opts[CURLOPT_POSTFIELDS]))) {
+            if (!isset($opts[CURLOPT_POSTFIELDS]) ||
+                (isset($opts[CURLOPT_POSTFIELDS]) && !is_array($opts[CURLOPT_POSTFIELDS]))
+            ) {
                 $opts[CURLOPT_POST] = 1;
             }
         } elseif (in_array($method, ['DELETE', 'PUT'])) {

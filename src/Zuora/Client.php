@@ -235,7 +235,12 @@ class Client
      */
     public function getCreditCards($id)
     {
-        return $this->getPaginatedObjects('payment-methods/credit-cards/accounts/' . $id, 'creditCards', CreditCard::class, ['pageSize' => 50]);
+        return $this->getPaginatedObjects(
+            'payment-methods/credit-cards/accounts/' . $id,
+            'creditCards',
+            CreditCard::class,
+            ['pageSize' => 50]
+        );
     }
 
     /**
@@ -251,7 +256,12 @@ class Client
      */
     public function getInvoices($id)
     {
-        return $this->getPaginatedObjects('transactions/invoices/accounts/' . $id, 'invoices', Invoice::class, ['pageSize' => 50]);
+        return $this->getPaginatedObjects(
+            'transactions/invoices/accounts/' . $id,
+            'invoices',
+            Invoice::class,
+            ['pageSize' => 50]
+        );
     }
 
     /**
@@ -267,7 +277,12 @@ class Client
      */
     public function getPayments($id)
     {
-        return $this->getPaginatedObjects('transactions/payments/accounts/' . $id, 'payments', Payment::class, ['pageSize' => 50]);
+        return $this->getPaginatedObjects(
+            'transactions/payments/accounts/' . $id,
+            'payments',
+            Payment::class,
+            ['pageSize' => 50]
+        );
     }
 
     /**
