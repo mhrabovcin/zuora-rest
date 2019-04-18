@@ -2,10 +2,12 @@
 
 namespace Zuora\Test\Exception;
 
+use PHPUnit\Framework\TestCase;
 use Zuora\Exception\ResponseException;
 use Zuora\Http\Response;
 
-class ResponseExceptionTest extends \PHPUnit_Framework_TestCase {
+class ResponseExceptionTest extends TestCase
+{
 
     public function testResponseException()
     {
@@ -33,4 +35,4 @@ class ResponseExceptionTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertContains($response->getErrorMessage(), $exception->getMessageFromResponse());
     }
-} 
+}

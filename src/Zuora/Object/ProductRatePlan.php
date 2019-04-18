@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class ProductRatePlan extends Object {
+class ProductRatePlan extends ZuoraObject
+{
 
     /**
      * Zuora id
@@ -73,6 +73,6 @@ class ProductRatePlan extends Object {
      */
     public function getRatePlanCharges()
     {
-        return $this->map('productRatePlanCharges', '\Zuora\Object\ProductRatePlanCharge');
+        return $this->map('productRatePlanCharges', ProductRatePlanCharge::class);
     }
-} 
+}

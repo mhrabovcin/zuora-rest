@@ -2,9 +2,11 @@
 
 namespace Zuora\Test\Http;
 
+use PHPUnit\Framework\TestCase;
 use Zuora\Http\Response;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase {
+class ResponseTest extends TestCase
+{
 
     protected function getTestOkResponse()
     {
@@ -35,7 +37,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
         $response = Response::fromString($this->getTestOkResponse());
         $this->assertEquals($response->getCode(), 200);
         $this->assertEquals($response->getData(), '{"success": true}');
-        $this->assertEquals($response->getCookies(), array());
+        $this->assertEquals($response->getCookies(), []);
     }
 
     public function testCookieParser()
@@ -65,4 +67,4 @@ class ResponseTest extends \PHPUnit_Framework_TestCase {
         $response->setErrorCode(68);
         $this->assertTrue($response->isError());
     }
-} 
+}

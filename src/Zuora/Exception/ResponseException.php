@@ -2,11 +2,10 @@
 
 namespace Zuora\Exception;
 
-
 use Zuora\Http\Response;
 
-class ResponseException extends Exception {
-
+class ResponseException extends Exception
+{
 
     /**
      * Http response object.
@@ -21,7 +20,7 @@ class ResponseException extends Exception {
      *
      * @param Response $response
      */
-    function __construct(Response $response)
+    public function __construct(Response $response)
     {
         $this->response = $response;
         parent::__construct($this->getMessageFromResponse());
@@ -43,7 +42,7 @@ class ResponseException extends Exception {
     public function getMessageFromResponse()
     {
         $response = $this->getResponse();
-        $message = array();
+        $message = [];
 
         if ($response->getCode()) {
             $message[] = $response->getCode();
@@ -70,13 +69,14 @@ class ResponseException extends Exception {
         return $this->getResponse()->getData();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function __toString()
     {
         if ($message = $this->getMessageFromResponse()) {
             return $message;
         }
-        else {
-            return parent::__toString();
-        }
+        return parent::__toString();
     }
 }

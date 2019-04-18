@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class AccountSummary extends Account {
+class AccountSummary extends Account
+{
 
     protected function getAllowedKeys()
     {
@@ -30,8 +30,8 @@ class AccountSummary extends Account {
         return $this->map('payments', '\Zuora\Object\PaymentSummary');
     }
 
-    public function getDefaultPaymentMethod() {
+    public function getDefaultPaymentMethod()
+    {
         return new DefaultPaymentMethod($this->defaultPaymentMethod);
     }
-
-} 
+}

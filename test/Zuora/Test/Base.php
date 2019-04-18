@@ -2,8 +2,10 @@
 
 namespace Zuora\Test;
 
+use PHPUnit\Framework\TestCase;
 
-class Base extends \PHPUnit_Framework_TestCase {
+class Base extends TestCase
+{
 
     /**
      * Get test environment
@@ -13,15 +15,14 @@ class Base extends \PHPUnit_Framework_TestCase {
      *
      * @return \Zuora\Environment
      */
-    protected function getEnvironment($options = array())
+    protected function getEnvironment($options = [])
     {
-        return \Zuora\Environment::factory($options + array(
+        return \Zuora\Environment::factory($options + [
            'username' => 'first.last@example.com',
            'password' => 'password',
            'endpoint' => 'http://api.example.com/rest',
-        ));
+        ]);
     }
-
 
     /**
      * Call protected/private method of a class.
@@ -35,7 +36,7 @@ class Base extends \PHPUnit_Framework_TestCase {
      *
      * @return mixed Method return.
      */
-    public function invokeMethod($object, $methodName, array $parameters = array())
+    public function invokeMethod($object, $methodName, array $parameters = [])
     {
         $reflection = new \ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
@@ -43,5 +44,4 @@ class Base extends \PHPUnit_Framework_TestCase {
 
         return $method->invokeArgs($object, $parameters);
     }
-
-} 
+}

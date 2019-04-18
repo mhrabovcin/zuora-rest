@@ -2,11 +2,12 @@
 
 namespace Zuora\Test\Exception;
 
-
+use PHPUnit\Framework\TestCase;
 use Zuora\Exception\ApiException;
 use Zuora\Http\Response;
 
-class ApiExceptionTest extends \PHPUnit_Framework_TestCase {
+class ApiExceptionTest extends TestCase
+{
 
     protected $error_data = '{
   "success": false,
@@ -35,7 +36,7 @@ class ApiExceptionTest extends \PHPUnit_Framework_TestCase {
         $this->assertCount(2, $exception->getReasons());
 
         foreach ($exception->getReasons() as $reason) {
-            $this->assertTrue(in_array($reason->getCode(), array(53100020, 53100320)));
+            $this->assertTrue(in_array($reason->getCode(), [53100020, 53100320]));
         }
 
         $string = $exception->__toString();
@@ -46,5 +47,4 @@ class ApiExceptionTest extends \PHPUnit_Framework_TestCase {
             $this->assertContains($reason->getMessage(), $string);
         }
     }
-
-} 
+}

@@ -2,18 +2,19 @@
 
 namespace Zuora\Test;
 
+use PHPUnit\Framework\TestCase;
 use Zuora\Environment;
 
-class EnvironmentTest extends \PHPUnit_Framework_TestCase
+class EnvironmentTest extends TestCase
 {
     public function testFactory()
     {
-        $options = array(
+        $options = [
             'username' => 'email@example.com',
             'password' => 'secretpassword',
             'endpoint' => 'https://endpoint.com/rest',
             'version' => '2',
-        );
+        ];
 
         $env = Environment::factory($options);
 
@@ -23,4 +24,4 @@ class EnvironmentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($options['version'], $env->getVersion());
         $this->assertEquals('https://endpoint.com/rest/v2/test', $env->getUrl('test'));
     }
-} 
+}

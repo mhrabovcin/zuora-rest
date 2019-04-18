@@ -2,12 +2,12 @@
 
 namespace Zuora\Test;
 
-
 use Zuora\Client;
+use Zuora\Http\RequestInterface;
 use Zuora\Http\Response;
 
-class ClientTest extends \Zuora\Test\Base {
-
+class ClientTest extends Base
+{
 
     /**
      * Test cURL error
@@ -17,18 +17,18 @@ class ClientTest extends \Zuora\Test\Base {
     public function testClientErrorCurlResponse()
     {
 
-        $enviroment = $this->getEnvironment();
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(0)
             ->setErrorCode(68)
             ->setErrorMessage("connection to host timed out");
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
             ->method('call')
             ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
     }
 
@@ -37,17 +37,18 @@ class ClientTest extends \Zuora\Test\Base {
      *
      * @expectedException \Zuora\Exception\ResponseException
      */
-    public function testClientApiErrorResponse() {
-        $enviroment = $this->getEnvironment();
+    public function testClientApiErrorResponse()
+    {
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(400);
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
            ->method('call')
            ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
     }
 
@@ -58,25 +59,24 @@ class ClientTest extends \Zuora\Test\Base {
      */
     public function testClientLogicErrorResponse()
     {
-        $enviroment = $this->getEnvironment();
+        $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(200)
-            ->setData(array(
+            ->setData([
                'success' => false,
                'processId' => '3F7EA3FD706C7E7C',
-               'reasons' => array(
-                  array('code' => 53100020, 'message' => ' {com.zuora.constraints.either_or_both}',),
-                  array('code' => 53100320, 'message' => "'termType' value should be one of: TERMED, EVERGREEN",)
-               )
-            ));
+               'reasons' => [
+                  ['code' => 53100020, 'message' => ' {com.zuora.constraints.either_or_both}',],
+                  ['code' => 53100320, 'message' => "'termType' value should be one of: TERMED, EVERGREEN",]
+               ]
+            ]);
 
-        $request = $this->getMock('\Zuora\Http\RequestInterface');
+        $request = $this->createMock(RequestInterface::class);
         $request->expects($this->once())
            ->method('call')
            ->will($this->returnValue($error_response));
 
-        $client = new Client($enviroment, $request);
+        $client = new Client($environment, $request);
         $client->request('test');
-
     }
-} 
+}

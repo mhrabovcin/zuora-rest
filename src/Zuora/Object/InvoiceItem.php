@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class InvoiceItem extends Object {
+class InvoiceItem extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -108,5 +108,4 @@ class InvoiceItem extends Object {
     {
         return $this->unitOfMeasure;
     }
-
-} 
+}

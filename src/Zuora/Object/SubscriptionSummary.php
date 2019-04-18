@@ -2,8 +2,7 @@
 
 namespace Zuora\Object;
 
-
-class SubscriptionSummary extends Object
+class SubscriptionSummary extends ZuoraObject
 {
 
     /**
@@ -93,4 +92,4 @@ class SubscriptionSummary extends Object
     {
         return $this->termType;
     }
-} 
+}

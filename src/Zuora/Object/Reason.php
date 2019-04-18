@@ -1,15 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mhrabovcin
- * Date: 10/05/14
- * Time: 19:36
- */
 
 namespace Zuora\Object;
 
-
-class Reason extends Object {
+class Reason extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -26,5 +20,4 @@ class Reason extends Object {
     {
         return $this->message;
     }
-
-} 
+}

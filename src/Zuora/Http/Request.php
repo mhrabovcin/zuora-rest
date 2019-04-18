@@ -4,7 +4,6 @@
 
 namespace Zuora\Http;
 
-
 class Request implements RequestInterface
 {
 
@@ -24,17 +23,17 @@ class Request implements RequestInterface
      *   - ssl_verifypeer_skip : Skip ssl verification
      *   - user_agent : Override user-agent name
      */
-    function __construct($curl_options = array())
+    public function __construct($curl_options = [])
     {
         // Add default options
-        $this->curl_options = $curl_options + array(
+        $this->curl_options = $curl_options + [
             'timeout' => 5,
             'ssl_verifypeer_skip' => false,
             'user_agent' => 'Zuora PHP Client/0.1',
             // Default SSL version is TLS v1.2. For PHP 5.5+ you may
             // use CURL constants as CURL_SSLVERSION_TLSv1_2
             'ssl_version' => 6,
-        );
+        ];
     }
 
     /**
@@ -59,21 +58,20 @@ class Request implements RequestInterface
      *
      * @return Response
      */
-    public function call($url, $method = 'GET', $query = array(), $data = array(), $headers = array(), $files = array())
+    public function call($url, $method = 'GET', $query = [], $data = [], $headers = [], $files = [])
     {
         // Normalize HTTP method name
         $method = $this->normalizeHttpMethod($method);
 
         // Zuora API talks in JSON
-        $headers += array(
+        $headers += [
             'Accept' => 'application/json',
-        );
+        ];
 
         // If sending files, app should be not json
         if (empty($files)) {
             $headers['Content-Type'] = 'application/json';
-        }
-        else {
+        } else {
             $files = array_map(function ($item) {
                 return '@' . $item;
             }, $files);
@@ -132,19 +130,19 @@ class Request implements RequestInterface
      * @return array
      *   cURL options
      */
-    protected function getCurlOptions($url, $port = null, $method = 'GET', $data = array(), $headers = array(), $files = array())
+    protected function getCurlOptions($url, $port = null, $method = 'GET', $data = [], $headers = [], $files = [])
     {
         // Default options for every CURL request
-        $opts = array(
+        $opts = [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => $this->curl_options['timeout'],
-            CURLOPT_HTTPHEADER => array(),
+            CURLOPT_HTTPHEADER => [],
             CURLOPT_HEADER => true,
             CURLINFO_HEADER_OUT => true,
             CURLOPT_USERAGENT => $this->curl_options['user_agent'],
             CURLOPT_SSLVERSION => $this->curl_options['ssl_version'],
-        );
+        ];
 
         if (isset($port)) {
             $opts[CURLOPT_PORT] = $port;
@@ -152,8 +150,7 @@ class Request implements RequestInterface
 
         if (!empty($files)) {
             $opts[CURLOPT_POSTFIELDS] = $files + $data;
-        }
-        elseif (!empty($data) && $method != 'GET') {
+        } elseif (!empty($data) && $method != 'GET') {
             $opts[CURLOPT_POSTFIELDS] = json_encode($data);
         }
 
@@ -162,8 +159,7 @@ class Request implements RequestInterface
             if (!isset($opts[CURLOPT_POSTFIELDS]) || (isset($opts[CURLOPT_POSTFIELDS]) && !is_array($opts[CURLOPT_POSTFIELDS]))) {
                 $opts[CURLOPT_POST] = 1;
             }
-        }
-        elseif (in_array($method, array('DELETE', 'PUT'))) {
+        } elseif (in_array($method, ['DELETE', 'PUT'])) {
             $opts[CURLOPT_CUSTOMREQUEST] = $method;
         }
 
@@ -205,7 +201,7 @@ class Request implements RequestInterface
      * @return array
      *   Array where 0 key is normalized URL and 1 is port if was specified in URL
      */
-    protected function normalizeUrl($url, $query = array())
+    protected function normalizeUrl($url, $query = [])
     {
         // URL can contain port, make sure its processed correctly.
         $parsed_url = parse_url($url);
@@ -227,6 +223,6 @@ class Request implements RequestInterface
             $url .= http_build_query($query, null, '&');
         }
 
-        return array($url, isset($parsed_url['port']) ? $parsed_url['port'] : NULL);
+        return [$url, isset($parsed_url['port']) ? $parsed_url['port'] : null];
     }
 }

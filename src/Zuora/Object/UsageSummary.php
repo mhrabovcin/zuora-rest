@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class UsageSummary extends Object {
+class UsageSummary extends ZuoraObject
+{
 
     /**
      * @return mixed
@@ -28,5 +28,4 @@ class UsageSummary extends Object {
     {
         return $this->unitOfMeasure;
     }
-
-} 
+}

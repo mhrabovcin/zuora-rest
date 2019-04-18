@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class UsageUploadResult extends Object {
+class UsageUploadResult extends ZuoraObject
+{
 
     /**
      * Retrieve uploaded file size
@@ -34,6 +34,6 @@ class UsageUploadResult extends Object {
     public function getImportStatusId()
     {
         preg_match('~usage/(?<id>[^/]+)/status~i', $this->getImportStatusUrl(), $match);
-        return isset($match['id']) ? $match['id'] : NULL;
+        return isset($match['id']) ? $match['id'] : null;
     }
-} 
+}

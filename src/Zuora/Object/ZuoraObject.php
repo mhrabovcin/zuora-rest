@@ -2,9 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class Object {
-
+class ZuoraObject
+{
 
     /**
      * Data retrieved from API response
@@ -18,7 +17,7 @@ class Object {
      *
      * @var array
      */
-    protected $mapped = array();
+    protected $mapped = [];
 
 
     /**
@@ -26,7 +25,7 @@ class Object {
      *
      * @param array $data
      */
-    function __construct($data = array())
+    public function __construct($data = [])
     {
         $this->data = $data;
     }
@@ -38,7 +37,7 @@ class Object {
      *
      * @return mixed
      */
-    function __get($name)
+    public function __get($name)
     {
         return isset($this->data[$name]) ? $this->data[$name] : null;
     }
@@ -81,7 +80,7 @@ class Object {
     public function map($property, $classname)
     {
         if (!isset($this->mapped[$property])) {
-            $this->mapped[$property] = array();
+            $this->mapped[$property] = [];
 
             if (!isset($this->data[$property])) {
                 throw new \InvalidArgumentException("{$property} doesn't exists.");
@@ -95,7 +94,7 @@ class Object {
                 throw new \InvalidArgumentException("{$classname} isn't valid name of PHP class.");
             }
 
-            $objects = array();
+            $objects = [];
 
             foreach ($this->data[$property] as $record) {
                 $objects[] = new $classname($record);

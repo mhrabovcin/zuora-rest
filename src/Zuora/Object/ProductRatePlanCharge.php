@@ -2,8 +2,8 @@
 
 namespace Zuora\Object;
 
-
-class ProductRatePlanCharge extends Object {
+class ProductRatePlanCharge extends ZuoraObject
+{
 
     /**
      * Zuora id
@@ -118,5 +118,4 @@ class ProductRatePlanCharge extends Object {
     {
         return $this->taxable;
     }
-
-} 
+}
