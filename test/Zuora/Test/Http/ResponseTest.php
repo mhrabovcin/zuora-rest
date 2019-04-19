@@ -11,25 +11,25 @@ class ResponseTest extends TestCase
     protected function getTestOkResponse()
     {
         return "HTTP/1.1 200 OK\r\n"
-              ."Date: Mon, 01 Apr 2013 01:39:16 GMT\r\n"
-              ."Content-Length: 24768\r\n"
-              ."Content-Type: application/json;charset=utf-8\r\n"
-              ."Connection: close\r\n"
-              ."Server: Apache-Coyote/1.1\r\n\r\n"
-              .'{"success": true}';
+             . "Date: Mon, 01 Apr 2013 01:39:16 GMT\r\n"
+             . "Content-Length: 24768\r\n"
+             . "Content-Type: application/json;charset=utf-8\r\n"
+             . "Connection: close\r\n"
+             . "Server: Apache-Coyote/1.1\r\n\r\n"
+             . '{"success": true}';
     }
 
     protected function getTestCookieResponse()
     {
         return "HTTP/1.1 200 OK\r\n"
-            ."Date: Mon, 01 Apr 2013 01:39:16 GMT\r\n"
-            ."Content-Length: 24768\r\n"
-            ."Content-Type: application/json;charset=utf-8\r\n"
-            ."Connection: close\r\n"
-            ."Set-Cookie: name=value\r\n"
-            ."Set-Cookie: name2=value2\r\n"
-            ."Server: Apache-Coyote/1.1\r\n\r\n"
-            .'{"success": true}';
+             . "Date: Mon, 01 Apr 2013 01:39:16 GMT\r\n"
+             . "Content-Length: 24768\r\n"
+             . "Content-Type: application/json;charset=utf-8\r\n"
+             . "Connection: close\r\n"
+             . "Set-Cookie: name=value\r\n"
+             . "Set-Cookie: name2=value2\r\n"
+             . "Server: Apache-Coyote/1.1\r\n\r\n"
+             . '{"success": true}';
     }
 
     public function testResponseParser()

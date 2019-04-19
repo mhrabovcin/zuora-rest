@@ -10,3 +10,4 @@ before_script:
 
 after_script:
   - php vendor/bin/php-coveralls -v
+  - php vendor/bin/phpcs --standard=PSR12 src/ test/
