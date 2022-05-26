@@ -7,7 +7,6 @@ use Zuora\Http\Response;
 
 class ResponseTest extends TestCase
 {
-
     protected function getTestOkResponse()
     {
         return "HTTP/1.1 200 OK\r\n"

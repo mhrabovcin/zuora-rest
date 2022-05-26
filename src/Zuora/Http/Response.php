@@ -4,7 +4,6 @@ namespace Zuora\Http;
 
 class Response
 {
-
     /**
      * HTTP Response code.
      *

@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class AccountSummary extends Account
 {
-
     protected function getAllowedKeys()
     {
         return array_merge(array('subscriptions', 'invoices', 'payments', 'usage'), parent::getAllowedKeys());

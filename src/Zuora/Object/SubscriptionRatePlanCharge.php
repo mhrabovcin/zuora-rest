@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class SubscriptionRatePlanCharge extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

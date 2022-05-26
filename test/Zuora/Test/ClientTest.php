@@ -3,19 +3,19 @@
 namespace Zuora\Test;
 
 use Zuora\Client;
+use Zuora\Exception\ApiException;
+use Zuora\Exception\ResponseException;
 use Zuora\Http\RequestInterface;
 use Zuora\Http\Response;
 
 class ClientTest extends Base
 {
-
     /**
      * Test cURL error
-     *
-     * @expectedException \Zuora\Exception\ResponseException
      */
     public function testClientErrorCurlResponse()
     {
+        $this->expectException(ResponseException::class);
 
         $environment = $this->getEnvironment();
         $error_response = new Response();
@@ -35,10 +35,12 @@ class ClientTest extends Base
     /**
      * Test HTTP response error
      *
-     * @expectedException \Zuora\Exception\ResponseException
+     *
      */
     public function testClientApiErrorResponse()
     {
+        $this->expectException(ResponseException::class);
+
         $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(400);
@@ -55,10 +57,12 @@ class ClientTest extends Base
     /**
      * Test zuora response error
      *
-     * @expectedException \Zuora\Exception\ApiException
+     *
      */
     public function testClientLogicErrorResponse()
     {
+        $this->expectException(ApiException::class);
+
         $environment = $this->getEnvironment();
         $error_response = new Response();
         $error_response->setCode(200)

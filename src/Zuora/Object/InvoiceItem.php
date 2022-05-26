@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class InvoiceItem extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

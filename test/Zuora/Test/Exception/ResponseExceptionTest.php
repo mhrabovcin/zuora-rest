@@ -8,7 +8,6 @@ use Zuora\Http\Response;
 
 class ResponseExceptionTest extends TestCase
 {
-
     public function testResponseException()
     {
         $response = new Response();
@@ -17,7 +16,7 @@ class ResponseExceptionTest extends TestCase
 
         $this->assertEquals($response->getData(), $exception->getData());
         // Test default stack trace
-        $this->assertContains('Stack trace', $exception->__toString());
+        $this->assertStringContainsString('Stack trace', $exception->__toString());
 
         // HTTP code
         $response->setCode(400);
@@ -31,8 +30,8 @@ class ResponseExceptionTest extends TestCase
 
         // cURL message
         $response->setErrorMessage('remote host timed out');
-        $this->assertContains($response->getErrorMessage(), $exception->__toString());
+        $this->assertStringContainsString($response->getErrorMessage(), $exception->__toString());
 
-        $this->assertContains($response->getErrorMessage(), $exception->getMessageFromResponse());
+        $this->assertStringContainsString($response->getErrorMessage(), $exception->getMessageFromResponse());
     }
 }

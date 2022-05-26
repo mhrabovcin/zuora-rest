@@ -8,7 +8,6 @@ use Zuora\Http\Response;
 
 class ResponseTest extends Base
 {
-
     /**
      * Tests Response pagination and class mapping
      */
@@ -58,7 +57,7 @@ class ResponseTest extends Base
         $this->assertEquals($next->getData(), $next_response->getData());
 
         $cards = $response->map('creditCards', '\Zuora\Object\CreditCard');
-        $this->assertInternalType('array', $cards);
+        $this->assertIsArray($cards);
 
         $response = new \Zuora\Response($http_response->setData([]), $client);
         $this->assertNull($response->nextPage());

@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class ZuoraObject
 {
-
     /**
      * Data retrieved from API response
      *

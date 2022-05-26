@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class ProductRatePlanCharge extends ZuoraObject
 {
-
     /**
      * Zuora id
      *

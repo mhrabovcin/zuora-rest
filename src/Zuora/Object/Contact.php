@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class Contact extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

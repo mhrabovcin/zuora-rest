@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class UsageSummary extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

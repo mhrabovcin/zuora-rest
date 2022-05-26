@@ -6,7 +6,6 @@ use Zuora\Http\Request;
 
 class RequestTest extends \Zuora\Test\Base
 {
-
     public function testRequestUrlHelpers()
     {
         $request = new Request();
@@ -63,13 +62,13 @@ class RequestTest extends \Zuora\Test\Base
 
         $options = $this->invokeMethod($request, 'getCurlOptions', [$url, $port, 'POST', $data]);
         $this->assertNotEmpty($options[CURLOPT_POSTFIELDS]);
-        $this->assertContains('test', $options[CURLOPT_POSTFIELDS]);
+        $this->assertStringContainsString('test', $options[CURLOPT_POSTFIELDS]);
 
         $options = $this->invokeMethod($request, 'getCurlOptions', [$url, $port, 'POST', $data, $headers]);
         $this->assertEquals($options[CURLOPT_HTTPHEADER][0], 'X-Custom: value');
 
         $options = $this->invokeMethod($request, 'getCurlOptions', [$url, $port, 'POST', $data, $headers, $files]);
-        $this->assertInternalType('array', $options[CURLOPT_POSTFIELDS]);
+        $this->assertIsArray($options[CURLOPT_POSTFIELDS]);
 
         // Test custom curl options
         $request = new Request([
