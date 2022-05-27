@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class Reason extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

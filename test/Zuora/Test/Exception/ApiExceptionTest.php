@@ -8,7 +8,6 @@ use Zuora\Http\Response;
 
 class ApiExceptionTest extends TestCase
 {
-
     protected $error_data = '{
   "success": false,
   "processId": "3F7EA3FD706C7E7C",
@@ -40,11 +39,11 @@ class ApiExceptionTest extends TestCase
         }
 
         $string = $exception->__toString();
-        $this->assertContains('3F7EA3FD706C7E7C', $string);
+        $this->assertStringContainsString('3F7EA3FD706C7E7C', $string);
 
         foreach ($exception->getReasons() as $reason) {
-            $this->assertContains((string) $reason->getCode(), $string);
-            $this->assertContains($reason->getMessage(), $string);
+            $this->assertStringContainsString((string) $reason->getCode(), $string);
+            $this->assertStringContainsString($reason->getMessage(), $string);
         }
     }
 }

@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class PaymentSummary extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

@@ -4,7 +4,6 @@ namespace Zuora\Exception;
 
 class ApiException extends ResponseException
 {
-
     /**
      * Retrieve Zuora Process ID
      *

@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class Product extends ZuoraObject
 {
-
     public function getId()
     {
         return $this->id;

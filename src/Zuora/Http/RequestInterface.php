@@ -4,7 +4,6 @@ namespace Zuora\Http;
 
 interface RequestInterface
 {
-
     /**
      * Make HTTP Request via cURL
      *

@@ -6,7 +6,6 @@ use Zuora\Http\Response;
 
 class ResponseException extends Exception
 {
-
     /**
      * Http response object.
      *

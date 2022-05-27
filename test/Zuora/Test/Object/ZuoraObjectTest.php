@@ -7,7 +7,6 @@ use Zuora\Object\ZuoraObject;
 
 class ZuoraObjectTest extends TestCase
 {
-
     public function testObject()
     {
         $data = [
@@ -25,11 +24,11 @@ class ZuoraObjectTest extends TestCase
 
     /**
      * Test exception on non-existing array key
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testMapWrongArgument()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $data = [];
         $object = new ZuoraObject($data);
         $object->map('noexisting', '\Zuora\Object\ZuoraObject');
@@ -37,11 +36,11 @@ class ZuoraObjectTest extends TestCase
 
     /**
      * Test exception on non-array key
-     *
-     * @expectedException \InvalidArgumentException
      */
-    public function testdMapWrongArgumentType()
+    public function testMapWrongArgumentType()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $data = ['scalar' => 'value'];
         $object = new ZuoraObject($data);
         $object->map('scalar', '\Zuora\Object\ZuoraObject');
@@ -49,11 +48,11 @@ class ZuoraObjectTest extends TestCase
 
     /**
      * Test exception on non-array key
-     *
-     * @expectedException \InvalidArgumentException
      */
-    public function testdMapWrongClassname()
+    public function testMapWrongClassname()
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         $data = ['test' => []];
         $object = new ZuoraObject($data);
         $object->map('test', 'MissingClass');

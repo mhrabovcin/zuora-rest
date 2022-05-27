@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class HmacSignature extends ZuoraObject
 {
-
     /**
      * @return mixed
      */

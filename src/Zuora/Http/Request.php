@@ -6,7 +6,6 @@ namespace Zuora\Http;
 
 class Request implements RequestInterface
 {
-
     /**
      * cURL options that will be added to each request.
      *
@@ -156,7 +155,8 @@ class Request implements RequestInterface
 
         // Add method specific cURL options
         if ($method == 'POST') {
-            if (!isset($opts[CURLOPT_POSTFIELDS]) ||
+            if (
+                !isset($opts[CURLOPT_POSTFIELDS]) ||
                 (isset($opts[CURLOPT_POSTFIELDS]) && !is_array($opts[CURLOPT_POSTFIELDS]))
             ) {
                 $opts[CURLOPT_POST] = 1;
@@ -222,9 +222,9 @@ class Request implements RequestInterface
         // If additional query array was passed add to final URL
         if (!empty($query)) {
             $url .= strpos($url, '?') === false ? '?' : '&';
-            $url .= http_build_query($query, null, '&');
+            $url .= http_build_query($query, '', '&');
         }
 
-        return [$url, isset($parsed_url['port']) ? $parsed_url['port'] : null];
+        return [$url, $parsed_url['port'] ?? null];
     }
 }

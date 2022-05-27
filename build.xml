@@ -4,7 +4,7 @@
   <property name="builddir" value="${basedir}/build"/>
   <property name="composer" value="${builddir}/composer.phar"/>
 
-  <target name="build" depends="lint,composer,phploc,pdepend,phpmd-ci,phpcpd,phpunit"/>
+  <target name="build" depends="lint,composer,pdepend,phpmd-ci,phpcpd,phpunit"/>
 
   <target name="clean" description="Cleanup build artifacts">
     <delete dir="${builddir}"/>
@@ -65,14 +65,6 @@
     <exec executable="${php}">
       <arg value="${composer}"/>
       <arg value="update"/>
-    </exec>
-  </target>
-
-  <target name="phploc" depends="composer" description="Measure project size using PHPLOC">
-    <exec executable="${basedir}/vendor/bin/phploc">
-      <arg value="--log-csv" />
-      <arg value="${builddir}/logs/phploc.csv" />
-      <arg path="${basedir}/src" />
     </exec>
   </target>
 

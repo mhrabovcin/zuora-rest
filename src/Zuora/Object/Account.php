@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class Account extends ZuoraObject
 {
-
     public function __construct($data = [])
     {
         $changed = $data['basicInfo'];

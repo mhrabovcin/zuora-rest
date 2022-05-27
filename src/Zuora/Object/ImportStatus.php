@@ -4,7 +4,6 @@ namespace Zuora\Object;
 
 class ImportStatus extends ZuoraObject
 {
-
     /**
      * @return mixed
      */
